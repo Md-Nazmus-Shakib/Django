@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Welcome to Student Management System</h1>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'homepage' %}">Home</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'data' %}">Data</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'home' %}">Student</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+        
+      </ul>
+      <form class="d-flex" method ="GET" action="{% url 'data' %}">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="q">
+        <button class="btn btn-outline-success" type="submit" href="{% url 'data' %}">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+   {% comment %} <table class="table table-bordered border-primary">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Password</th>
+          <th scope="col">Checkbox</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for student in student_data %}
+        <tr>
+          <th scope="row">{{ forloop.counter }}</th>
+          <td>{{ student.name }}</td>
+          <td>{{ student.email }}</td>
+          <td>{{ student.password }}</td>
+          <td>{{ student.checkbox }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+</table>
+  </body> {% endcomment %}
+  <div class="container mt-4 d-flex flex-wrap gap-4 justify-content-between container">
+{%for student in student_data%}
+ <div class="card" style="width: 18rem;height: 25rem;">
+  <img src="{{student.photo.url}}" class="card-img-top" alt="..." style="width: 18rem;height: 15rem;">
+  <div class="card-body"
+    <h5 class="card-title">{{student.name}}</h5>
+    <p class="card-text">{{student.email}}</p>
+    <a href="{% url 'delete_student' student.unique_ID %}" class="btn btn-danger">Delete</a>
+    <a href="{% url 'edit_student' unique_ID=student.unique_ID %}" class="btn btn-warning">Edit</a>
+  </div>
+</div>
+{%endfor%}
+  </div>
+  <script>
+  // যখন page fully load হয়ে যায়
+  window.addEventListener("load", function () {
+    // check করো query parameter আছে কি না
+    const url = new URL(window.location.href);
+    if (url.searchParams.has("q")) {
+      // URL থেকে query param remove করো
+      url.searchParams.delete("q");
+      window.history.replaceState({}, document.title, url.pathname);
+    }
+  });
+</script>
+
+  </body>
+  
+</html>
