@@ -97,7 +97,7 @@ myproject/
 
 **Md. Nazmus Shakib Khan**
 💼 [GitHub](https://github.com/Md-Nazmus-Shakib)
-📧 Email: *[your_email@example.com](mailto:your_email@example.com)*
+📧 Email: khan35-998@diu.edu.bd
 
 ---
 
