@@ -10,7 +10,7 @@ def student_directory_name(instance,filename):
 class student(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField(max_length=254, unique=True)
-    age = models.PositiveIntegerField()
+    age = models.PositiveIntegerField(null=True,blank=True)
     unique_ID = models.PositiveIntegerField(primary_key=True,unique=True,null=False,blank=False)
     password = models.CharField(max_length=8)
     checkbox = models.BooleanField(default=False)
